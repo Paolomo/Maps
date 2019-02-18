@@ -10,9 +10,7 @@
    See https://github.com/apache/cordova-plugin-statusbar
 */
 
-.statusbar-overlay {
-    background: #000000;
-}
+
 /*PM*/
 .page-content{
    text-align: center;
@@ -26,4 +24,7 @@ input.convert{
 {
     border: 0;
     text-align: center;
+}
+.view{
+    background-color: #FFFFFF;
 }

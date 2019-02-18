@@ -90,12 +90,22 @@
                     <div class="page-content">
                         <div class="content-block">
                             <p><button onclick="geoFindMe()">Show my location</button></p>
+                            <div id="map"></div>
                             <div id="out"></div>
+                            <div id="country"></div>
+                            <div id="city"></div>
+                            <div id="currency"></div>
+                            <div id="temp"></div>
+                            <div id="current"></div>
+                            <div id="wind"></div>
+                            <div>  <button id="buttonPic" onclick="pics()">Picture</button>   </div>
+                            <div><img id="myImage" height="50%" width="50%"></img></div>
+                            <div id="file"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="map"></div>
+            
             <!-- Bottom Toolbar-->
             <div class="toolbar">
                 <div class="toolbar-inner">
@@ -106,12 +116,12 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="cordova.js"></script>
+   <!-- <script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
-    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script 
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap">
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=notInUse">
     </script>
 </body>
 
