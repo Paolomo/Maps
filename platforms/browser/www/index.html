@@ -20,35 +20,37 @@
     under the License.
 -->
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-   
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-   
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+  <!--PM Screenshot twois reason to comment it out  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
 
-     <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>Paolo Currency Converter</title>
+
+    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
         http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
      -->
-
+<!--PM Path to Framework7 Library CSS -->
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
-
+<!--PM Path to your custom app styles-->
     <link rel="stylesheet" href="css/styles.css">
-    <title>Hello World</title>
 </head>
 
 <body>
@@ -63,7 +65,6 @@
             <p>Left panel content goes here</p>
         </div>
     </div>
-
     <!-- Views -->
     <div class="views">
         <!-- Your main view, should have "view-main" class -->
@@ -98,10 +99,57 @@
                             <div id="temp"></div>
                             <div id="current"></div>
                             <div id="wind"></div>
+                            <div id="exchangeInclude">
+                                <div class="list">
+                            <!-- gap below-->
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+                            <div class="item-content item-input">                        
+                            <div class="item-inner">
+                                <div class="item-title item-lable">Amount</div>
+                                <!-- framework 7-->
+                                <div class="item-input-wrap">
+                                    <!-- text box7 calling function checkRate maybe use unblur below-->                              
+                                <input type="text" name="amount" id="amount" placeholder="Enter Amount" onchange="checkRates();"/>
+                                    
+                                <span id="amountfrom" class="input-clear-button">USD</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div>&nbsp;</div>
+                            <div class="item-content item-input">
+                               <!-- <span name="amountfrom" id="amountfrom">USD</span>-->
+                                 <!-- calling swap function-->
+                                <span><button onclick="swap()">Swap</button></span>
+                                <!-- <span name="amountto" id="amountto">EUR</span>-->
+                            </div>
+                            <div>&nbsp;</div>
+                            <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-lable">You Get</div>
+                                <div class="item-input-wrap">
+                                <!-- <span name="amountfrom" id="amountfrom">USD</span>-->
+                                     <!-- readonly cant be edited-->
+                                <input type="text" name="result" id="result" placeholder="Amount You Get" readonly="readonly"/>
+                                     <!-- input-clear wont highlight, from google-->
+                                <span id="amountto" class="input-clear-button">EUR</span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="item-content item-input">
+                                <div>&nbsp;</div>
+                                <div class="item-inner">
+                                     <!-- <span dynamically changing the data. Inner html-->
+                                   Exchange rate from <span id="fromrate"></span> to <span id="torate"></span> : <span id="exchange"></span>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
                             <div>  <button id="buttonPic" onclick="pics()">Picture</button>   </div>
-                            <div><img id="myImage" height="50%" width="50%"></img></div>
+                            <div><img id="myImage" height="50%" width="50%"></div>
                             <div id="file"></div>
                         </div>
+                     
                     </div>
                 </div>
             </div>
@@ -116,13 +164,15 @@
             </div>
         </div>
     </div>
-   <!-- <script type="text/javascript" src="cordova.js"></script>-->
+      
+ 
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script 
+   <script 
      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=notInUse">
-    </script>
+    </script> 
 </body>
 
 </html>

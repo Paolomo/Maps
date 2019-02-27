@@ -28,3 +28,8 @@ input.convert{
 .view{
     background-color: #FFFFFF;
 }
+
+#map {
+ height: 400px;
+ width: 100%;
+}
