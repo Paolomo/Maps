@@ -191,6 +191,7 @@ function tryingFile(){
 
         // Displaying in front end
         var toFronEnd = 'file system open: ' + fs.name;
+        // ASK ABOUT THE BELOW
         document.getElementById('file').innerHTML = toFronEnd;
 
         // Name of the file I want to create
@@ -209,7 +210,9 @@ function tryingFile(){
             
             // Now decide what to do
             // Write to the file
-            writeFile(fileEntry, null);
+           writeFile(fileEntry, document.getElementById('file'));
+            // writeFile(fileEntry, 777);
+            //writeFile(fileEntry, null);
             // pass all data into above
 
               }, function (error) {
