@@ -158,5 +158,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "org.apache.cordova.camera": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-camera@0.3.6"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
