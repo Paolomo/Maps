@@ -16,7 +16,7 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
     checkRates(); // onload of the page when amount entered is empty, still exchange rate is displayed at the bottom, so call this checkRates() function onload of page
     geoFindMe();
-    tryingFile(); //has writeFile call in it
+  //  tryingFile(); //has writeFile call in it -Replaced by button at the bottom of the page as per intruction
 });
 
 
@@ -52,7 +52,7 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 function geoFindMe() {
     
   var output = document.getElementById("out");
-
+/* check condition to make sure navigator works, to call geolocation function*/
   if (!navigator.geolocation){
     output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
     return;
@@ -60,7 +60,8 @@ function geoFindMe() {
     
       output.innerHTML = "<p>Locating…</p>";
 
-  navigator.geolocation.getCurrentPosition(success, error);
+  /* calling getcurrentposition fucntion*/
+    navigator.geolocation.getCurrentPosition(success, error);
     
  }
 
@@ -68,16 +69,20 @@ function geoFindMe() {
   function success(position) {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
-    
+   /*passing latitude and longitude coordinaes to opencage*/ 
     opencageapi(latitude, longitude);
      
     var output = document.getElementById("out");
     output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
-    var img = new Image();
-    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls";
-
-    output.appendChild(img);
+    /* Map commented out and now not displayed as per discussed*/
+   // var img = new Image();
+   // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false&key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls";
+      
+   
+   // output.appendChild(img);
+      
+    /* calling initMap to display map*/
     initMap(latitude,longitude);
       
   }
@@ -99,24 +104,22 @@ function initMap(lat,lng) {
         position: {lat: -23.6993336, lng: 133.8713752},
         map: map
     }); */
-    
+    /*calling opencage function by passing position coordinates*/
     opencageapi(lat, lng);
-    
+    /*calling getweatherlocation function by passing position coordinates*/
     getWeatherLocation(lat, lng);    
 
 
 }
 
-function notInUse(){
-        console.log("I'm on the right place");
-}
+
 
   function error() {
     output.innerHTML = "Im in function notInUse error";
   }
 
-// ----------- OPENCAGE API
-
+// ----------- OPENCAGE API  gives local information
+/* opencage function takes position coordinates and gets country, currency, city data */
 function opencageapi(lat, lng) {
 
     var http = new XMLHttpRequest();
@@ -145,7 +148,7 @@ function opencageapi(lat, lng) {
 }
 
 //---weather
-
+/* getWeatherLocation function takes position coordinates and gets temp,current weather and wind speed data */
 function getWeatherLocation(lat, lng) {
 
     var http = new XMLHttpRequest();
@@ -181,7 +184,7 @@ function cameraCallback(imageData){
 
 
 // ----------- SAVING FILES (READING AND WRITING)
-
+/*tryfile function creates a file and calls writefile function */
 function tryingFile(){
   
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs){

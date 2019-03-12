@@ -90,7 +90,8 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
-                            <p><button onclick="geoFindMe()">Show my location</button></p>
+                            <!-- Show my Location button commented out, as geoFindeMe() is called after device load  -->
+                           <!-- <p><button onclick="geoFindMe()">Show my location</button></p>-->
                             <div id="map"></div>
                             <div id="out"></div>
                             <div id="country"></div>
@@ -100,10 +101,13 @@
                             <div id="current"></div>
                             <div id="wind"></div>
                             <div id="exchangeInclude">
+                            
+                                 <!-- Currency convertor code starts here-->
                                 <div class="list">
                             <!-- gap below-->
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
+                           
                             <div class="item-content item-input">                        
                             <div class="item-inner">
                                 <div class="item-title item-lable">Amount</div>
@@ -144,16 +148,20 @@
                                 </div>
                             </div>
                                 </div>
+                                
+                                <!-- Currency convertor code ends here-->
                             </div>
+                             <!-- Button for Camera/Picture-->
                             <div>  <button id="buttonPic" onclick="pics()">Picture</button>   </div>
                             <div><img id="myImage" height="50%" width="50%"></div>
                             <div>&nbsp;</div>
                             <div>&nbsp;</div>
-                           
+                            <!-- Button for Open File-->
                             <div>  <button id="buttonFile" onclick="tryingFile()">Open File</button>   </div>
                             <div>&nbsp;</div>
                             <div id="file"></div>
                             <div>&nbsp;</div>
+                             <!-- Button for File write-->
                             <div>  <button id="buttonFile" onclick="writeFile()">Write File</button>   </div>
                             <div>&nbsp;</div>
                             <div id="file"></div>
